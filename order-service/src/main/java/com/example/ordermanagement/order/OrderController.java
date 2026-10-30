@@ -8,6 +8,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/orders")
+@CrossOrigin(origins = "http://localhost:5173")
 public class OrderController {
     private final OrderService service;
     public OrderController(OrderService service) { this.service = service; }
@@ -20,4 +21,10 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public OrderResponse get(@PathVariable UUID id) { return service.find(id); }
+
+    @GetMapping("/hello")
+    public ResponseEntity<String> hello()
+    {
+    return ResponseEntity.ok("Order service is running");
+    }
 }
