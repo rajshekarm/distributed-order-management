@@ -1,0 +1,22 @@
+spring:
+  application.name: order-management
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/orders}
+    username: ${DB_USERNAME:orders}
+    password: ${DB_PASSWORD:orders}
+  jpa:
+    open-in-view: false
+    hibernate.ddl-auto: update
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: order-management
+      auto-offset-reset: earliest
+management:
+  endpoints.web.exposure.include: health,info,prometheus,metrics
+  endpoint.health.show-details: when_authorized
+server:
+  shutdown: graceful
