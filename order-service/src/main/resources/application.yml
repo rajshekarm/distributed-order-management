@@ -6,7 +6,9 @@ spring:
     password: ${DB_PASSWORD:orders}
   jpa:
     open-in-view: false
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: validate
+  flyway:
+    enabled: true
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     producer:
